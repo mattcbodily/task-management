@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {getUser} from '../../redux/userReducer';
 
-export default props => {
+const Landing = props => {
     let [loginView, setLoginView] = useState(true),
         [firstName, setFirstName] = useState(''),
         [lastName, setLastName] = useState(''),
@@ -13,7 +15,8 @@ export default props => {
     const login = () => {
         axios.post('/api/login', {email, password})
         .then(res => {
-            //do something here
+            props.getUser(res.data)
+            props.history.push('/dashboard')
         })
         .catch(err => console.log(err));
     }
@@ -22,9 +25,12 @@ export default props => {
         if(password !== '' && password === verPassword){
             axios.post('/api/register', {firstName, lastName, email, password})
             .then(res => {
-                //do something here
+                props.getUser(res.data)
+                props.history.push('/dashboard')
             })
             .catch(err => console.log(err));
+        } else {
+            alert("Passwords don't match")
         }
     }
 
@@ -81,3 +87,5 @@ export default props => {
         </div>
     )
 }
+
+export default connect(null, {getUser})(Landing);
