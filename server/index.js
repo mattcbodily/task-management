@@ -3,6 +3,7 @@ const express = require('express'),
       massive = require('massive'),
       sessions = require('express-session'),
       authCtrl = require('./controllers/authController'),
+      projectCtrl = require('./controllers/projectController'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
       app = express();
 
@@ -25,5 +26,8 @@ massive({
 app.post('/api/register', authCtrl.register);
 app.post('/api/login', authCtrl.login);
 app.get('/api/logout', authCtrl.logout);
+
+app.get('/api/projects/:id', projectCtrl.getProjects);
+app.post('/api/project', projectCtrl.createProject);
 
 app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`))
