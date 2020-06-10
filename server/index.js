@@ -4,6 +4,7 @@ const express = require('express'),
       sessions = require('express-session'),
       authCtrl = require('./controllers/authController'),
       projectCtrl = require('./controllers/projectController'),
+      taskCtrl = require('./controllers/taskController'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
       app = express();
 
@@ -29,5 +30,8 @@ app.get('/api/logout', authCtrl.logout);
 
 app.get('/api/projects/:id', projectCtrl.getProjects);
 app.post('/api/project/:id', projectCtrl.createProject);
+
+app.get('/api/tasks/:id', taskCtrl.getTasks);
+app.post('/api/task', taskCtrl.createTask);
 
 app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`))

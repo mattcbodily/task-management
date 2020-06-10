@@ -15,7 +15,7 @@ module.exports = {
         const {id} = req.params,
               db = req.app.get('db');
 
-        db.projects.get_projects(id)
+        db.projects.get_projects(+id)
         .then(projects => res.status(200).send(projects))
         .catch(err => res.status(500).send(err));
     }

@@ -7,7 +7,10 @@ const ProjectModal = props => {
 
     const createProject = () => {
         axios.post(`/api/project/${props.id}`, {projectName, projectDescription})
-        .then(() => props.modalFn(false))
+        .then(() => {
+            props.projectsFn();
+            props.modalFn(false);
+        })
         .catch(err => console.log(err));
     }
 
