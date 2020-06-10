@@ -28,6 +28,6 @@ app.post('/api/login', authCtrl.login);
 app.get('/api/logout', authCtrl.logout);
 
 app.get('/api/projects/:id', projectCtrl.getProjects);
-app.post('/api/project', projectCtrl.createProject);
+app.post('/api/project/:id', projectCtrl.createProject);
 
 app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`))

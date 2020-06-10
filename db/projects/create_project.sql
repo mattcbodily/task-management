@@ -4,4 +4,5 @@ insert into project (
 ) values (
     ${projectName},
     ${projectDescription}
-);
+)
+returning project_id;

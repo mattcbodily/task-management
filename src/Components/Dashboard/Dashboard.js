@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import ProjectModal from '../ProjectModal/ProjectModal';
 
 const Dashboard = props => {
-    let [projects, setProjects] = useState([]);
+    let [projects, setProjects] = useState([]),
+        [modalView, setModalView] = useState(false);
 
     useEffect(() => {
         axios.get(`/api/projects/${props.user.user_id}`)
@@ -23,9 +25,12 @@ const Dashboard = props => {
                 : (
                     <>
                         <p>You don't have any projects!</p>
-                        <button>Create a project</button>
+                        <button onClick={() => setModalView(true)}>Create a project</button>
                     </>
-                )}                
+                )}
+                {modalView
+                ? <ProjectModal id={props.user.user_id} modalFn={setModalView}/>
+                : null}                
             </section>
         </div>
     )
