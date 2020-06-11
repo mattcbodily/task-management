@@ -32,6 +32,6 @@ app.get('/api/projects/:id', projectCtrl.getProjects);
 app.post('/api/project/:id', projectCtrl.createProject);
 
 app.get('/api/tasks/:id', taskCtrl.getTasks);
-app.post('/api/task', taskCtrl.createTask);
+app.post('/api/task/:id', taskCtrl.createTask);
 
 app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`))

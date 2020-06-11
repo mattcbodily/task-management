@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import TaskModal from '../TaskModal/TaskModal';
 
 const TaskDisplay = props => {
-    let [tasks, setTasks] = useState([]);
+    let [tasks, setTasks] = useState([]),
+        [taskModal, setTaskModal] = useState(false);
 
     const getTasks = () => {
         axios.get(`/api/tasks/${props.match.params.id}`)
@@ -10,18 +12,27 @@ const TaskDisplay = props => {
         .catch(err => console.log(err));
     }
 
+    useEffect(() => {
+        getTasks();
+    }, [])
+
     return (
         <div>
             {tasks.length
             ? tasks.map((task, i) => (
-                <div key={i}>{task}</div>
+                <div key={i}>
+                    <p>{task.task_name}</p>
+                </div>
             ))
             : (
                 <>
                     <p>This project has no tasks</p>
-                    <button>Add a Task</button>
+                    <button onClick={() => setTaskModal(true)}>Add a Task</button>
                 </>
             )}
+            {taskModal
+            ? <TaskModal taskFn={getTasks} modalFn={setTaskModal}/>
+            : null}
         </div>
     )
 }

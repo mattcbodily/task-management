@@ -4,6 +4,6 @@ insert into task (
     user_id
 ) values (
     ${taskName},
-    'Not Started',
+    ${taskProgress},
     ${id}
 );
