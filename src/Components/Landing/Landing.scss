@@ -1,0 +1,11 @@
+@import '../../mixins';
+
+.landing {
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-top: 15vh;
+}
+
+.landing-flex {
+    @include column-flex;
+}

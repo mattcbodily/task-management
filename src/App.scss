@@ -1,0 +1,22 @@
+@import './variables';
+@import './mixins';
+
+.App {
+  min-height: 100vh;
+  width: 100%;
+  text-align: center;
+  background: $main-color;
+  color: snow;
+}
+
+input {
+  @include main-input;
+}
+
+button {
+  @include main-button;
+}
+
+h1, p {
+  margin: 0;
+}

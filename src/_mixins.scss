@@ -1,0 +1,30 @@
+@import './variables';
+
+@mixin main-input {
+    height: 40px;
+    width: 300px;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    margin-bottom: 15px;
+    background: $secondary-color;
+    border: none;
+    border-radius: 10px;
+    color: $text-color;
+    font-size: $normal-font-size;
+    outline: none;
+}
+
+@mixin main-button {
+    height: 35px;
+    width: 300px;
+    border-radius: 10px;
+    border: none;
+    font-size: $normal-font-size;
+}
+
+@mixin column-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
