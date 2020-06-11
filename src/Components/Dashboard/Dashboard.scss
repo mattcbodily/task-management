@@ -1,0 +1,15 @@
+.project-flex {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.project-links {
+    height: 60px;
+    width: 60px;
+    // change the color
+    background: #894FC7;
+    color: white;
+    border: none;
+    border-radius: 15px;
+}
