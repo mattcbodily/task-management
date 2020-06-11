@@ -22,6 +22,9 @@ const Dashboard = props => {
     return (
         <div>
             <section>
+                <h1>Hi {props.user.first_name}</h1>
+                <p>Welcome back to your workspace!</p>
+                <h3>Projects</h3>
                 {projects.length
                 ? projects.map((project, i) => (
                     <Link to={`/dashboard/${project.project_id}/tasks`} key={i}>P</Link>
@@ -29,7 +32,7 @@ const Dashboard = props => {
                 : (
                     <>
                         <p>You don't have any projects!</p>
-                        <button onClick={() => setModalView(true)}>Create a project</button>
+                        <button className='create-button' onClick={() => setModalView(true)}>+</button>
                     </>
                 )}
                 {modalView

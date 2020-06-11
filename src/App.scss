@@ -9,6 +9,10 @@
   color: snow;
 }
 
+.create-button {
+  @include create-button;
+}
+
 input {
   @include main-input;
 }
