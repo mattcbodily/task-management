@@ -7,7 +7,9 @@ const TaskModal = props => {
         [taskProgress, setTaskProgress] = useState('Not Started');
 
     const createTask = () => {
-        axios.post(`/api/task/${props.user.user_id}`, {taskName, taskProgress})
+        const {projectId} = props;
+
+        axios.post(`/api/task/${props.user.user_id}`, {taskName, taskProgress, projectId})
         .then(() => {
             props.taskFn();
             props.modalFn();

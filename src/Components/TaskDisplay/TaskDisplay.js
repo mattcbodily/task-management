@@ -15,7 +15,19 @@ const TaskDisplay = props => {
 
     useEffect(() => {
         getTasks();
-    }, [])
+    }, [props.match.params])
+
+    const updateTaskProgress = (id, val) => {
+        axios.put(`/api/task-progress/${id}`, {taskProgress: val})
+        .then(() => getTasks())
+        .catch(err => console.log(err));
+    }
+
+    const completeTask = (id) => {
+        axios.put(`/api/task/${id}`)
+        .then(() => getTasks())
+        .catch(err => console.log(err));
+    }
 
     return (
         <div className='task-display'>
@@ -24,8 +36,8 @@ const TaskDisplay = props => {
             ? tasks.map((task, i) => (
                 <div key={i} className='task-grid'>
                     <div className='task-checkbox'>
-                    <input type='checkbox' id={`checkbox_${task.task_id}`}/>
-                        <label for={`checkbox_${task.task_id}`}></label>
+                    <input type='checkbox' id={`checkbox_${task.task_id}`} onChange={() => completeTask(task.task_id)}/>
+                        <label htmlFor={`checkbox_${task.task_id}`}></label>
                     </div>
                     <p>{task.task_name}</p>
                     <div className={`progress-display ${task.task_progress}`}>{task.task_progress}</div>
@@ -38,7 +50,7 @@ const TaskDisplay = props => {
                 </>
             )}
             {taskModal
-            ? <TaskModal taskFn={getTasks} modalFn={setTaskModal}/>
+            ? <TaskModal taskFn={getTasks} modalFn={setTaskModal} projectId={+props.match.params.id}/>
             : null}
         </div>
     )

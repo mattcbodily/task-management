@@ -1,6 +1,7 @@
 .project-flex {
+    box-sizing: border-box;
+    padding: 0px 20px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
 }
 

@@ -27,18 +27,19 @@ const Dashboard = props => {
                 <p>Welcome back to your workspace!</p>
                 <h3>Projects</h3>
                 {projects.length
-                    ? projects.map((project, i) => (
+                    ? (
                         <section className='project-flex'>
-                            <section>
-                                <Link className='link-style' to={`/dashboard/${project.project_id}/tasks`} key={i}>
+                            <button className='create-button' onClick={() => setModalView(true)}>+</button>
+                            {projects.map((project, i) => (
+                                <Link className='link-style' to={`/dashboard/tasks/${project.project_id}`} key={i}>
                                     <div className='project-links'>
                                         {project.project_name.charAt(0)}
                                     </div>
                                     <p>{project.project_name}</p>
                                 </Link>
-                            </section>
+                            ))}
                         </section>
-                    ))
+                    )
                     : (
                         <>
                             <p>You don't have any projects!</p>
@@ -51,7 +52,7 @@ const Dashboard = props => {
             </section>
             <section>
                 <Switch>
-                    <Route exact path='/dashboard/:id/tasks' component={TaskDisplay} />
+                    <Route path='/dashboard/tasks/:id' component={TaskDisplay} />
                 </Switch>
             </section>
         </div>

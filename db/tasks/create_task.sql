@@ -1,9 +1,11 @@
 insert into task (
     task_name,
     task_progress,
-    user_id
+    user_id,
+    project_id
 ) values (
     ${taskName},
     ${taskProgress},
-    ${id}
+    ${id},
+    ${projectId}
 );
