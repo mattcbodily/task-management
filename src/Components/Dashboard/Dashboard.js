@@ -29,7 +29,14 @@ const Dashboard = props => {
                 {projects.length
                     ? projects.map((project, i) => (
                         <section className='project-flex'>
-                            <Link className='project-links' to={`/dashboard/${project.project_id}/tasks`} key={i}>{project.project_name.charAt(0)}</Link>
+                            <section>
+                                <Link className='link-style' to={`/dashboard/${project.project_id}/tasks`} key={i}>
+                                    <div className='project-links'>
+                                        {project.project_name.charAt(0)}
+                                    </div>
+                                    <p>{project.project_name}</p>
+                                </Link>
+                            </section>
                         </section>
                     ))
                     : (

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import TaskModal from '../TaskModal/TaskModal';
+import './TaskDisplay.scss';
 
 const TaskDisplay = props => {
     let [tasks, setTasks] = useState([]),
@@ -17,7 +18,7 @@ const TaskDisplay = props => {
     }, [])
 
     return (
-        <div>
+        <div className='task-display'>
             {tasks.length
             ? tasks.map((task, i) => (
                 <div key={i}>

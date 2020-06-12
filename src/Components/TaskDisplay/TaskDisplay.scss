@@ -1,0 +1,19 @@
+.task-display {
+    height: 65vh;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    background: snow;
+    color: black;
+    border-radius: 15px 15px 0px 0px;
+    animation: 250ms linear slide;
+}
+
+@keyframes slide {
+    from {
+        bottom: -65vh;
+    }
+    to {
+        bottom: 0px;
+    }
+}
