@@ -4,7 +4,6 @@
     position: fixed;
     bottom: 0px;
     background: snow;
-    color: black;
     border-radius: 15px 15px 0px 0px;
     animation: 250ms linear slide;
 }
@@ -22,6 +21,7 @@
     text-align: left;
     grid-area: 'taskname';
     line-height: 25px;
+    color: #B3B4BE
 }
 
 .task-checkbox {
@@ -53,7 +53,7 @@
 }
 
 .task-checkbox input[type='checkbox']:checked + label::before {
-    background: blue;
+    background: #3ADAD8;
 }
 
 .task-checkbox label::before {

@@ -15,5 +15,22 @@ module.exports = {
         db.tasks.create_task({taskName, taskProgress, id: +id})
         .then(() => res.sendStatus(200))
         .catch(err => console.log(err));
+    },
+    updateTaskProgress: (req, res) => {
+        const {id} = req.params,
+              {taskProgress} = req.body,
+              db = req.app.get('db');
+
+        db.tasks.update_task_progress({taskProgress, id})
+        .then(() => res.sendStatus(200))
+        .catch(err => res.status(500).send(err))
+    },
+    completeTask: (req, res) => {
+        const {id} = req.params,
+              db = req.app.get('db');
+
+        db.tasks.complete_task({id})
+        .then(() => res.sendStatus(200))
+        .catch(err => res.status(500).send(err))
     }
 }
