@@ -33,8 +33,11 @@
 }
 
 .task-checkbox input[type='checkbox'] {
-    visibility: hidden;
-    position: relative;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    position: absolute;
+    left: -9999px;
 }
   
 .task-checkbox input[type='checkbox']:not(:checked) + label::after {
@@ -43,6 +46,14 @@
 
 .task-checkbox input[type='checkbox']:checked + label::after {
     opacity: 1;
+}
+
+.task-checkbox input[type='checkbox']:not(:checked) + label:hover::before {
+    background: lightgray;
+}
+
+.task-checkbox input[type='checkbox']:checked + label::before {
+    background: blue;
 }
 
 .task-checkbox label::before {
@@ -62,8 +73,8 @@
     display: inline-block;
     height: 6px;
     width: 10px;
-    border-left: 2px solid;
-    border-bottom: 2px solid;
+    border-left: 2px solid snow;
+    border-bottom: 2px solid snow;
     transform: rotate(-45deg);
     position: absolute;
     top: 50%;
