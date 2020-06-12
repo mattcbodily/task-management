@@ -19,10 +19,16 @@ const TaskDisplay = props => {
 
     return (
         <div className='task-display'>
+            <p>Tasks</p>
             {tasks.length
             ? tasks.map((task, i) => (
-                <div key={i}>
+                <div key={i} className='task-grid'>
+                    <div className='task-checkbox'>
+                    <input type='checkbox' id={`checkbox_${task.task_id}`}/>
+                        <label for={`checkbox_${task.task_id}`}></label>
+                    </div>
                     <p>{task.task_name}</p>
+                    <div className={`progress-display ${task.task_progress}`}>{task.task_progress}</div>
                 </div>
             ))
             : (
