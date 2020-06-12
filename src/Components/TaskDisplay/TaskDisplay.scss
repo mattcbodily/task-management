@@ -1,11 +1,13 @@
 .task-display {
     height: 65vh;
-    width: 100%;
+    width: 94%;
     position: fixed;
-    bottom: 0px;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -47%;
     background: snow;
-    border-radius: 15px 15px 0px 0px;
-    animation: 250ms linear slide;
+    border-radius: 15px;
+    animation: 250ms linear expand;
 }
 
 .task-grid {
@@ -49,7 +51,7 @@
 }
 
 .task-checkbox input[type='checkbox']:not(:checked) + label:hover::before {
-    background: lightgray;
+    background: #B3B4BE;
 }
 
 .task-checkbox input[type='checkbox']:checked + label::before {
@@ -62,7 +64,7 @@
     height: 20px;
     width: 20px;
     border-radius: 50%;
-    border: 1px solid gray;
+    border: 1px solid #B3B4BE;
     position: absolute;
     top: 0;
     left: 0;
@@ -85,7 +87,7 @@
 
 .progress-display {
     height: 25px;
-    width: 150px;
+    width: 105px;
     border-radius: 15px;
     line-height: 25px;
     // text-align: center;
@@ -94,13 +96,11 @@
     grid-area: 'progress'
 }
 
-
-
-@keyframes slide {
+@keyframes expand {
     from {
-        bottom: -65vh;
+        transform: scale(0);
     }
     to {
-        bottom: 0px;
+        transform: scale(1);
     }
 }
