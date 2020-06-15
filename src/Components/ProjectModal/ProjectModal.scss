@@ -1,0 +1,9 @@
+@import '../../mixins';
+
+.project-modal-backdrop {
+    @include modal-backdrop;
+}
+
+.project-modal {
+    @include modal-mobile;
+}
