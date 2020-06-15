@@ -96,6 +96,12 @@
     grid-area: 'progress'
 }
 
+.task-create-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
 @keyframes expand {
     from {
         transform: scale(0);
