@@ -1,0 +1,9 @@
+@import '../../mixins';
+
+.task-modal-backdrop {
+    @include modal-backdrop;
+}
+
+.task-modal {
+    @include modal-mobile;
+}

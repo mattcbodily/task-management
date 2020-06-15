@@ -55,7 +55,6 @@ const TaskDisplay = props => {
             {tasks.length
                 ? <button className='create-button task-create-button' onClick={() => setTaskModal(true)}>+</button>
                 : null}
-
         </div>
     )
 }

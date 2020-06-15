@@ -38,3 +38,26 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin modal-backdrop {
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin modal-mobile {
+    height: 350px;
+    width: 94%;
+    background: snow;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
