@@ -5,7 +5,8 @@ import './TaskDisplay.scss';
 
 const TaskDisplay = props => {
     let [tasks, setTasks] = useState([]),
-        [taskModal, setTaskModal] = useState(false);
+        [taskModal, setTaskModal] = useState(false),
+        [progressModal, setProgressModal] = useState(false);
 
     const getTasks = () => {
         axios.get(`/api/tasks/${props.match.params.id}`)
@@ -40,7 +41,21 @@ const TaskDisplay = props => {
                             <label htmlFor={`checkbox_${task.task_id}`}></label>
                         </div>
                         <p>{task.task_name}</p>
-                        <div className={`progress-display ${task.task_progress}`}>{task.task_progress}</div>
+                        <div className={`progress-display ${task.task_progress.replace(/ /, '-').toLowerCase()}`} onClick={() => setProgressModal(!progressModal)}>
+                            {task.task_progress}
+                        </div>
+                        {progressModal
+                        ? (
+                            <div className='modal-backdrop'>
+                                <ul className='progress-modal'>
+                                    <li>Not Started</li>
+                                    <li>In Progress</li>
+                                    <li>Delayed</li>
+                                    <li>Blocked</li>
+                                </ul>
+                            </div>
+                        )
+                        : null}
                     </div>
                 ))
                 : (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './ProjectModal.scss';
 
 const ProjectModal = props => {
     let [projectName, setProjectName] = useState(''),
@@ -26,6 +27,7 @@ const ProjectModal = props => {
                     placeholder='Project Description'
                     onChange={(e) => setProjectDescription(e.target.value)} />
                 <button onClick={createProject}>Create Project</button>
+                <button onClick={() => props.modalFn(false)}>Cancel</button>
             </section>
         </div>
     )
