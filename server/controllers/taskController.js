@@ -21,6 +21,9 @@ module.exports = {
               {taskProgress} = req.body,
               db = req.app.get('db');
 
+        console.log(id)
+        console.log(taskProgress)
+
         db.tasks.update_task_progress({taskProgress, id})
         .then(() => res.sendStatus(200))
         .catch(err => res.status(500).send(err))

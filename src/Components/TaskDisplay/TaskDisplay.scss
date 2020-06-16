@@ -92,24 +92,28 @@
     width: 105px;
     border-radius: 15px;
     line-height: 25px;
-    color: white;
+    font-weight: bold;
     grid-area: 'progress'
 }
 
 .not-started {
     background: #ECEEF0;
+    color: #BCC3CB;
 }
 
 .in-progress {
     background: #E3EFFD;
+    color: #8DBBF6;
 }
 
 .delayed {
     background: #FDEEE8;
+    color: #F6B7A2;
 }
 
 .blocked {
     background: #FF7E7E;
+    color: #FF4141;
 }
 
 .modal-backdrop {

@@ -20,7 +20,10 @@ const TaskDisplay = props => {
 
     const updateTaskProgress = (id, val) => {
         axios.put(`/api/task-progress/${id}`, { taskProgress: val })
-            .then(() => getTasks())
+            .then(() => {
+                getTasks();
+                setProgressModal(false);
+            })
             .catch(err => console.log(err));
     }
 
@@ -41,17 +44,17 @@ const TaskDisplay = props => {
                             <label htmlFor={`checkbox_${task.task_id}`}></label>
                         </div>
                         <p>{task.task_name}</p>
-                        <div className={`progress-display ${task.task_progress.replace(/ /, '-').toLowerCase()}`} onClick={() => setProgressModal(!progressModal)}>
+                        <div className={`progress-display ${task.task_progress.replace(/ /, '-').toLowerCase()}`} onClick={() => setProgressModal(true)}>
                             {task.task_progress}
                         </div>
                         {progressModal
                         ? (
                             <div className='modal-backdrop'>
                                 <ul className='progress-modal'>
-                                    <li>Not Started</li>
-                                    <li>In Progress</li>
-                                    <li>Delayed</li>
-                                    <li>Blocked</li>
+                                    <li onClick={() => updateTaskProgress(task.task_id, 'Not Started')}>Not Started</li>
+                                    <li onClick={() => updateTaskProgress(task.task_id, 'In Progress')}>In Progress</li>
+                                    <li onClick={() => updateTaskProgress(task.task_id, 'Delayed')}>Delayed</li>
+                                    <li onClick={() => updateTaskProgress(task.task_id, 'Blocked')}>Blocked</li>
                                 </ul>
                             </div>
                         )
