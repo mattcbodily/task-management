@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TaskModal from '../TaskModal/TaskModal';
+import Task from './Task';
 import './TaskDisplay.scss';
 
 const TaskDisplay = props => {
     let [tasks, setTasks] = useState([]),
-        [taskModal, setTaskModal] = useState(false),
-        [progressModal, setProgressModal] = useState(false);
+        [taskModal, setTaskModal] = useState(false);
 
     const getTasks = () => {
         axios.get(`/api/tasks/${props.match.params.id}`)
@@ -18,48 +18,12 @@ const TaskDisplay = props => {
         getTasks();
     }, [props.match.params])
 
-    const updateTaskProgress = (id, val) => {
-        axios.put(`/api/task-progress/${id}`, { taskProgress: val })
-            .then(() => {
-                getTasks();
-                setProgressModal(false);
-            })
-            .catch(err => console.log(err));
-    }
-
-    const completeTask = (id) => {
-        axios.put(`/api/task/${id}`)
-            .then(() => getTasks())
-            .catch(err => console.log(err));
-    }
-
     return (
         <div className='task-display'>
             <p>Tasks</p>
             {tasks.length
-                ? tasks.map((task, i) => (
-                    <div key={i} className='task-grid'>
-                        <div className='task-checkbox'>
-                            <input type='checkbox' id={`checkbox_${task.task_id}`} onChange={() => completeTask(task.task_id)} />
-                            <label htmlFor={`checkbox_${task.task_id}`}></label>
-                        </div>
-                        <p>{task.task_name}</p>
-                        <div className={`progress-display ${task.task_progress.replace(/ /, '-').toLowerCase()}`} onClick={() => setProgressModal(true)}>
-                            {task.task_progress}
-                        </div>
-                        {progressModal
-                        ? (
-                            <div className='modal-backdrop'>
-                                <ul className='progress-modal'>
-                                    <li onClick={() => updateTaskProgress(task.task_id, 'Not Started')}>Not Started</li>
-                                    <li onClick={() => updateTaskProgress(task.task_id, 'In Progress')}>In Progress</li>
-                                    <li onClick={() => updateTaskProgress(task.task_id, 'Delayed')}>Delayed</li>
-                                    <li onClick={() => updateTaskProgress(task.task_id, 'Blocked')}>Blocked</li>
-                                </ul>
-                            </div>
-                        )
-                        : null}
-                    </div>
+                ? tasks.sort((a, b) => a.task_id - b.task_id).map((task, i) => (
+                    <Task key={i} task={task} taskFn={getTasks} />
                 ))
                 : (
                     <>
