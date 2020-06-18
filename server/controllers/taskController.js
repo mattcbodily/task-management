@@ -9,10 +9,10 @@ module.exports = {
     },
     createTask: (req, res) => {
         const {id} = req.params,
-              {taskName, taskProgress, projectId} = req.body,
+              {taskName, taskProgress, projectId, completeBy} = req.body,
               db = req.app.get('db');
 
-        db.tasks.create_task({taskName, taskProgress, id: +id, projectId})
+        db.tasks.create_task({taskName, taskProgress, id: +id, projectId, completeBy})
         .then(() => res.sendStatus(200))
         .catch(err => console.log(err));
     },

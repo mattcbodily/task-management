@@ -5,12 +5,12 @@ import './TaskModal.scss';
 
 const TaskModal = props => {
     let [taskName, setTaskName] = useState(''),
-        [taskProgress, setTaskProgress] = useState('Not Started');
+        [taskProgress, setTaskProgress] = useState('Not Started'),
+        [completeBy, setCompleteBy] = useState('');
 
     const createTask = () => {
         const { projectId } = props;
-
-        axios.post(`/api/task/${props.user.user_id}`, { taskName, taskProgress, projectId })
+        axios.post(`/api/task/${props.user.user_id}`, {taskName, taskProgress, projectId, completeBy})
             .then(() => {
                 props.taskFn();
                 props.modalFn(false);
@@ -30,6 +30,8 @@ const TaskModal = props => {
                     <option value='Not Started'>Not Started</option>
                     <option value='In Progress'>In Progress</option>
                 </select>
+                <label>Complete By:</label>
+                <input type='date' value={completeBy} onChange={(e) => setCompleteBy(e.target.value)}/>
                 <button onClick={createTask}>Create</button>
                 <button onClick={() => props.modalFn(false)}>Cancel</button>
             </section>
