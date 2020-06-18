@@ -6,17 +6,33 @@ import './TaskDisplay.scss';
 
 const TaskDisplay = props => {
     let [tasks, setTasks] = useState([]),
+        [todayTasks, setTodayTasks] = useState([]),
         [taskModal, setTaskModal] = useState(false);
 
     const getTasks = () => {
         axios.get(`/api/tasks/${props.match.params.id}`)
-            .then(res => setTasks(res.data))
+            .then(res => {
+                let today = new Date();
+                let day = today.getDate();
+                let month = today.getMonth() + 1 < 10 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+                let year = today.getFullYear();
+                today = `${year}-${month}-${day}`;
+
+                let currentTasks = res.data.filter(e => e.complete_by === today),
+                    upcomingTasks = res.data.filter(e => e.complete_by !== today);
+
+                setTasks(upcomingTasks);
+                setTodayTasks(currentTasks);
+            })
             .catch(err => console.log(err));
     }
 
     useEffect(() => {
         getTasks();
     }, [props.match.params])
+
+    console.log(tasks)
+    console.log(todayTasks)
 
     return (
         <div className='task-display'>
