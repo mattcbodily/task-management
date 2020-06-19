@@ -36,23 +36,22 @@ const TaskDisplay = props => {
 
     return (
         <div className='task-display'>
-            <p>Tasks</p>
+            <p>Today</p>
+            {todayTasks.length
+                ? todayTasks.sort((a, b) => a.task_id - b.task_id).map((task, i) => (
+                    <Task key={i} task={task} taskFn={getTasks} />
+                ))
+                : <p>No tasks due today</p>}
+            <p>Upcoming</p>
             {tasks.length
                 ? tasks.sort((a, b) => a.task_id - b.task_id).map((task, i) => (
                     <Task key={i} task={task} taskFn={getTasks} />
                 ))
-                : (
-                    <>
-                        <p>This project has no tasks</p>
-                        <button onClick={() => setTaskModal(true)}>Add a Task</button>
-                    </>
-                )}
+                : <p>No upcoming tasks</p>}
             {taskModal
                 ? <TaskModal taskFn={getTasks} modalFn={setTaskModal} projectId={+props.match.params.id} />
                 : null}
-            {tasks.length
-                ? <button className='create-button task-create-button' onClick={() => setTaskModal(true)}>+</button>
-                : null}
+            <button className='create-button task-create-button' onClick={() => setTaskModal(true)}>+</button>
         </div>
     )
 }
