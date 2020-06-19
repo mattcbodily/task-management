@@ -26,3 +26,9 @@ create table if not exists task (
     project_id int references project(project_id),
     complete_by varchar(50)
 );
+
+create table if not exists task_note (
+    note_id serial primary key,
+    task_id int references task(task_id),
+    note text
+);

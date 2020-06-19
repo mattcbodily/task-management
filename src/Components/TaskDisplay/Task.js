@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moreIcon from '../../assets/more-vertical.svg';
 import axios from 'axios';
 
 const Task = props => {
@@ -29,11 +30,11 @@ const Task = props => {
             <div className={`progress-display ${props.task.task_progress.replace(/ /, '-').toLowerCase()}`} onClick={() => setEditProgress(true)}>
                 {props.task.task_progress}
             </div>
+            <img className='more-icon' src={moreIcon} alt='Menu'/>
             {editProgress
                 ? (
                     <div className='modal-backdrop'>
                         <ul className='progress-modal'>
-                            <li>{props.task.task_id}</li>
                             <li onClick={() => updateTaskProgress(props.task.task_id, 'Not Started')}>Not Started</li>
                             <li onClick={() => updateTaskProgress(props.task.task_id, 'In Progress')}>In Progress</li>
                             <li onClick={() => updateTaskProgress(props.task.task_id, 'Delayed')}>Delayed</li>

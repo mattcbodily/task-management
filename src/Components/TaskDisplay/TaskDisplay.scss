@@ -15,8 +15,8 @@
 
 .task-grid {
     display: grid;
-    grid-template-columns: 50px 2fr 1fr;
-    grid-template-areas: 'checkbox taskname progress';
+    grid-template-columns: 50px 2fr 1fr 20px;
+    grid-template-areas: 'checkbox taskname progress more';
     box-sizing: border-box;
     margin: 10px 0px;
     padding: 0px 15px;
@@ -117,12 +117,16 @@
     color: #FF7C7C;
 }
 
+.more-icon {
+    grid-area: 'more';
+}
+
 .modal-backdrop {
     @include modal-backdrop
 }
 
 .progress-modal {
-    height: 260px;
+    height: 160px;
     width: 94%;
     border-radius: 15px;
     margin: 0;
