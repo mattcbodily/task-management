@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import moreIcon from '../../assets/more-vertical.svg';
 import axios from 'axios';
+import TaskMenu from './TaskMenu';
 
 const Task = props => {
-    let [editProgress, setEditProgress] = useState(false);
+    let [editProgress, setEditProgress] = useState(false),
+        [menuView, setMenuView] = useState(false);
 
     const updateTaskProgress = (id, val) => {
         axios.put(`/api/task-progress/${id}`, { taskProgress: val })
@@ -30,7 +32,7 @@ const Task = props => {
             <div className={`progress-display ${props.task.task_progress.replace(/ /, '-').toLowerCase()}`} onClick={() => setEditProgress(true)}>
                 {props.task.task_progress}
             </div>
-            <img className='more-icon' src={moreIcon} alt='Menu'/>
+            <img className='more-icon' src={moreIcon} alt='Menu' onClick={() => setMenuView(true)}/>
             {editProgress
                 ? (
                     <div className='modal-backdrop'>
@@ -42,6 +44,9 @@ const Task = props => {
                         </ul>
                     </div>
                 )
+                : null}
+            {menuView
+                ? <TaskMenu task={props.task} menuFn={setMenuView}/>
                 : null}
         </div>
     )
