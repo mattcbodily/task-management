@@ -35,6 +35,7 @@ app.get('/api/tasks/:id', taskCtrl.getTasks);
 app.get('/api/task-notes/:id', taskCtrl.getTaskNotes);
 app.post('/api/task/:id', taskCtrl.createTask);
 app.post('/api/task-note/:id', taskCtrl.addTaskNote);
+app.put('/api/task-date/:id', taskCtrl.updateDate);
 app.put('/api/task-progress/:id', taskCtrl.updateTaskProgress);
 app.put('/api/task/:id', taskCtrl.completeTask);
 

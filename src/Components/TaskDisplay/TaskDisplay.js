@@ -31,9 +31,6 @@ const TaskDisplay = props => {
         getTasks();
     }, [props.match.params])
 
-    console.log(tasks)
-    console.log(todayTasks)
-
     return (
         <div className='task-display'>
             <p>Today</p>

@@ -3,5 +3,6 @@ insert into task_note (
     note
 ) values (
     ${id},
-    ${taskNote}
-);
+    ${noteInput}
+)
+returning note;

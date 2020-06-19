@@ -26,10 +26,19 @@ module.exports = {
     },
     addTaskNote: (req, res) => {
         const {id} = req.params,
-              {taskNote} = req.body,
+              {noteInput} = req.body,
               db = req.app.get('db');
 
-        db.tasks.add_task_note({id, taskNote})
+        db.tasks.add_task_note({id, noteInput})
+        .then(note => res.status(200).send(note))
+        .catch(err => res.status(500).send(err));
+    },
+    updateDate: (req, res) => {
+        const {id} = req.params,
+              {completeBy} = req.body,
+              db = req.app.get('db');
+
+        db.tasks.update_date({completeBy, id})
         .then(() => res.sendStatus(200))
         .catch(err => res.status(500).send(err));
     },
