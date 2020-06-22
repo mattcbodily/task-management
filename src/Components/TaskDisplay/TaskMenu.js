@@ -12,12 +12,16 @@ const TaskMenu = props => {
     }, [])
 
     const addTaskNote = () => {
-        axios.post(`/api/task-note/${props.task.task_id}`, {noteInput})
+        let today = new Date();
+        let day = today.getDate();
+        let month = today.getMonth() + 1 < 10 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
+        let year = today.getFullYear();
+        today = `${year}-${month}-${day}`;
+
+        axios.post(`/api/task-note/${props.task.task_id}`, {noteInput, noteDate: today})
         .then(res => setTaskNotes(res.data))
         .catch(err => console.log(err))
     }
-
-    console.log(taskNotes)
 
     return (
         <div className='task-menu-backdrop'>

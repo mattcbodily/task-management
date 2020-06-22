@@ -1,8 +1,10 @@
 insert into task_note (
     task_id,
-    note
+    note,
+    note_date
 ) values (
     ${id},
-    ${noteInput}
+    ${noteInput},
+    ${noteDate}
 )
-returning note;
+returning note, note_date;
