@@ -7,6 +7,7 @@ import './TaskDisplay.scss';
 const TaskDisplay = props => {
     let [tasks, setTasks] = useState([]),
         [todayTasks, setTodayTasks] = useState([]),
+        [pastDueTasks, setPastDueTasks] = useState([]),
         [taskModal, setTaskModal] = useState(false);
 
     const getTasks = () => {
@@ -19,10 +20,12 @@ const TaskDisplay = props => {
                 today = `${year}-${month}-${day}`;
 
                 let currentTasks = res.data.filter(e => e.complete_by === today),
-                    upcomingTasks = res.data.filter(e => e.complete_by !== today);
+                    upcomingTasks = res.data.filter(e => e.complete_by > today),
+                    pastDueTasks = res.data.filter(e => e.complete_by < today);
 
                 setTasks(upcomingTasks);
                 setTodayTasks(currentTasks);
+                setPastDueTasks(pastDueTasks);
             })
             .catch(err => console.log(err));
     }
@@ -48,6 +51,12 @@ const TaskDisplay = props => {
             {taskModal
                 ? <TaskModal taskFn={getTasks} modalFn={setTaskModal} projectId={+props.match.params.id} />
                 : null}
+            <p>Past Due</p>
+            {pastDueTasks.length
+                ? pastDueTasks.sort((a, b) => a.task_id - b.task_id).map((task, i) => (
+                    <Task key={i} task={task} taskFn={getTasks} />
+                ))
+                : <p>No past due tasks</p>}
             <button className='create-button task-create-button' onClick={() => setTaskModal(true)}>+</button>
         </div>
     )
